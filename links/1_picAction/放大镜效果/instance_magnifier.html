@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+    *{margin:0; padding:0;}
+    #box{
+        margin:100px;
+        height:2500px;
+        width:1200px;
+        position:relative;
+    }
+    #sPic{
+        float:left;
+        width:576px;
+        height:360px;
+    }
+    #bPic{
+        float:right;
+        width:576px;
+        height:360px;
+        overflow:hidden;
+        display:none;
+        position:relative;
+    }
+    #area{
+        width:192px;
+        height:120px;
+        background:#0000FF;
+        position:absolute;
+        top:0;
+        left:0;
+        opacity:0.5;
+        display:none;
+    }
+    #movingPic{
+        position:absolute;
+        top:0;
+        left:0;
+    }
+    </style>
+
+</head>
+<body>
+<div id="box">
+    <div id="sPic">
+        <b id="area"></b>
+        <img src="imgs/zelda2.jpg">
+    </div>
+    <div id="bPic">
+        <img src="imgs/zelda.jpg" id="movingPic">
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+    var sPic=document.getElementById("sPic"),
+        bPic=document.getElementById("bPic"),
+        area=document.getElementById("area"),
+        img=document.getElementById("movingPic");
+
+    sPic.onmousemove=function(ev){
+        var e=window.event||ev;
+        bPic.style.display="block";
+        area.style.display="block";
+        //随着X和Y轴滚动条的滚动，鼠标距离边框的距离也会发生变化，此时应该将滚动条的拉动距离也计算在x内。
+        var scrollX=document.body.scrollLeft || document.documentElement.scrollLeft;
+        var scrollY=document.body.scrollTop || document.documentElement.scrollTop;
+        var x=e.clientX+scrollX-100-area.offsetWidth/2;
+        var y=e.clientY+scrollY-100-area.offsetHeight/2;
+        //进行判断，若是鼠标移出边界，则让该区域停留在小图的边界上，防止越界；注意x和y的值的计算。
+        if(x<0){
+            x=0;
+        }else if(x>sPic.offsetWidth-area.offsetWidth){
+            x=sPic.offsetWidth-area.offsetWidth;
+        }
+        if(y<0){
+            y=0;
+        }else if(y>sPic.offsetHeight-area.offsetHeight){
+            y=sPic.offsetHeight-area.offsetHeight;
+        }
+        area.style.top=y+"px";
+        area.style.left=x+"px";
+//右边大图的移动和小图的移动呈反方向，而且移动速度和图片倍率一致
+        img.style.top=-y*3+"px";
+        img.style.left=-x*3+"px";
+
+    }
+
+
+    sPic.onmouseout=function(){
+        bPic.style.display="none";
+        area.style.display="none";
+    }
+
+</script>
+</body>
+</html>

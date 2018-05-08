@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推拉门</title>
+    <style>
+        *{margin:0px; padding:0px;}
+        #box{
+            margin:50px auto;
+            width:1240px;
+            height:960px;
+            overflow:hidden;
+        }
+
+        ul{
+            list-style-type:none;
+            width:4200px;
+            height:960px;
+        }
+        ul li{
+            float:left;
+            width:100px;
+            height:960px;
+        }
+
+        .active{
+            height:960px;
+            width:540px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li class="active"><img src="imgs/1.jpg" alt=""></li>
+            <li><img src="imgs/2.jpeg" alt=""></li>
+            <li><img src="imgs/3.jpeg" alt=""></li>
+            <li><img src="imgs/4.jpg" alt=""></li>
+            <li><img src="imgs/5.jpg" alt=""></li>
+            <li><img src="imgs/6.jpeg" alt=""></li>
+            <li><img src="imgs/7.png" alt=""></li>
+            <li><img src="imgs/8.jpg" alt=""></li>
+        </ul>
+    </div>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+        $("ul li").mouseover(function(){
+            //这里要记得每次移入一个新的li对象时，要清空所有动画队列，来防止放大和缩小的动画重合
+
+            $(this).stop(true).animate({width:540},500).siblings().stop(true).animate({width:100},500);
+
+        });
+    })
+
+</script>
+</body>
+</html>

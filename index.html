@@ -1,11 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>mypersonalpage</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script src="/dist/build.js"></script>
-  </body>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="个人网站">
+    <meta name="keywords" content="HTML,CSS,jquery,前端,简历">
+    <meta name="author" content="Cauzinc">
+    <link rel="shortcut icon" href="imgs/backIcon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pageA.css">
+    <link rel="stylesheet" href="css/pageB.css">
+    <link rel="stylesheet" href="css/pageC.css">
+    <link rel="stylesheet" href="css/pageD.css">
+    <title>一个小站</title>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.transit.js"></script>
+</head>
+<body>
+    <div id="container">
+        <!--主页面-->
+        <ul id="content">
+            <!--第一页-->
+            <li>
+                <!--背景-->
+                <div  class="bg pageA"></div>
+                <ul class="mainCon">
+                    <!--内容框背景与幕布-->
+                    <li class="screen"><img src="imgs/screen.jpg" alt="#"></li>
+                    <li class="innerbg"></li>
+                    <!--分栏-->
+                    <li class="educate">
+                        <div class="mainCon_col">
+                            <div class="mainCon_col_icon"><img src="imgs/educate.svg" alt="#"></div>
+                            <span class="mainCon_col_descri">毕业院校</span>
+                            <div class="mainCon_col_info">
+                                <p>
+                                    本科：浙江师范大学<br />
+                                    硕士：厦门大学
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="targetJob">
+                        <div class="mainCon_col">
+                            <div class="mainCon_col_icon"><img src="imgs/gear.svg" alt="#"></div>
+                            <span class="mainCon_col_descri">求职意向</span>
+                            <div class="mainCon_col_info">
+                                <p>
+                                    前端工程师
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="graduateTime">
+                        <div class="mainCon_col">
+                            <div class="mainCon_col_icon"><img src="imgs/gear2.svg" alt="#"></div>
+                            <span class="mainCon_col_descri">毕业时间</span>
+                            <div class="mainCon_col_info">
+                                <p>
+                                    2018年
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="targetCity">
+                        <div class="mainCon_col">
+                            <div class="mainCon_col_icon"><img src="imgs/coordinate.svg" alt="#"></div>
+                            <span class="mainCon_col_descri">工作地点</span>
+                            <div class="mainCon_col_info">
+                                <p>
+                                    杭州 || 上海
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </li>
+            <!--第二页-->
+            <li>
+                <div class="bg pageB"></div>
+                <div class="skillCon">
+                    <div class="innerbg"></div>
+                    <div class="skillCon_graph">
+                        <canvas class="skillGraph"></canvas>
+                    </div>
+                </div>
+            </li>
+            <!--第三页-->
+            <li>
+                <div class="bg pageC"></div>
+                <div class="textBoard">
+                    <ol id="ol" class="skillList"></ol>
+                </div>
+            </li>
+            <!--第四页-->
+            <li>
+                <div class="bg pageD"></div>
+            </li>
+        </ul>
+        <!--导航-->
+        <nav>
+            <ul class="navBox">
+                <li class="active">个人资料</li>
+                <li>我的技能</li>
+                <li>作品汇总</li>
+                <li>社会经历</li>
+            </ul>
+        </nav>
+        <!--头像-->
+        <div class="profilePhoto"></div>
+        <!--对话框-->
+        <div class="dialogBox">
+            <canvas class="dialogCan"></canvas>
+            <div class="contact">
+                <p>I'm waiting for u</p>
+                <table>
+                    <tr>
+                        <td style="width:50px">Email</td>
+                        <td style="width:50px">cauzinc_hu@qq.com</td>
+                    </tr>
+                    <tr>
+                        <td>Tel</td>
+                        <td>18046306865</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <!--测试动画效果的按钮-->
+       <!-- <div id="btn">
+            <button>test</button>
+        </div>-->
+    </div>
+
+<script src="js/swipe.js"></script>
+<script src="js/EventTarget.js"></script>
+<script src="js/async_animate.js"></script>
+<script src="js/initial.js"></script>
+<script src="js/main.js"></script>
+<script type="text/javascript">
+
+</script>
+
+</body>
 </html>
+
+
+

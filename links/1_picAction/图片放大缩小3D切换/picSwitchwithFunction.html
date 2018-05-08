@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播放大缩小</title>
+    <style>
+        *{margin:0; padding:0;}
+        /*用来放图片的盒子要稍微大一些*/
+        #box{
+            position:relative;
+            margin:50px auto;
+            height:420px;
+            width:760px;
+            overflow:hidden;
+            text-align:center;
+        }
+        ul{
+            position:relative;
+            list-style-type:none;
+            width:560px;
+            height:420px;
+        }
+        /*将所有的图片隐藏起来，并且横向排放*/
+        ul li{
+            position:absolute;
+            top:120px;
+            left:700px;
+            height:0;
+            width:0;
+            float:left;
+            background: #000;   /*黑色背景加透明，效果更好*/
+        }
+        /*这里要记得给img增加百分百的宽高的效果*/
+        ul li img{
+            width:100%;
+            height:100%;
+            opacity:0.5;
+        }
+        #btn div{
+            width:30px;
+            height:60px;
+            line-height: 60px;
+            position:absolute;
+            top:180px;
+            cursor:pointer;
+            background:deepskyblue;
+            opacity:0.4;
+            z-index:11;
+        }
+        #btn2{
+            left:730px;
+        }
+
+        /*位于正中间的图片为p1，两侧的图为p6和p2，进行移动时把移入正中的图的属性改为p1的属性*/
+        #p1{
+            top:0;
+            width:560px;
+            height:420px;
+            left:100px;
+            z-index:10;
+        }
+        #p1 img{
+            opacity:1;
+        }
+        #p2{
+            width:420px;
+            height:315px;
+            top:52px;
+            left:340px;
+            z-index:9;
+        }
+        #p3{
+            width:560px;
+            height:100px;
+            top:120px;
+            left:560px;
+
+        }
+        #p5{
+            width:560px;
+            height:100px;
+            top:120px;
+            left:-120px;
+            z-index:8;
+        }
+        #p6{
+            width:420px;
+            height:315px;
+            top:52px;
+            left:0;
+            z-index:9;
+        }
+
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li id="p1"><img src="img/1.jpg" alt=""></li>
+        <li id="p2"><img src="img/2.jpg" alt=""></li>
+        <li id="p3"><img src="img/3.jpg" alt=""></li>
+        <li id="p4"><img src="img/4.jpg" alt=""></li>
+        <li id="p5"><img src="img/5.jpg" alt=""></li>
+        <li id="p6"><img src="img/6.jpg" alt=""></li>
+    </ul>
+    <div id="btn">
+        <div id="btn1"><</div>
+        <div id="btn2">></div>
+    </div>
+
+    <script src="js/animate.js"></script>
+    <script src="js/myJs.js"></script>
+</div>
+
+</body>
+</html>

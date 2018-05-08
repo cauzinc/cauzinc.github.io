@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义滚动条</title>
+    <style>
+        *{margin:0; padding:0;}
+        div{
+            display:inline-block;
+        }
+        #scroll{
+            position:relative;
+            width:25px;
+            height:300px;
+            border:2px solid #000000;
+            margin:25px;
+        }
+        #scrollBar{
+            position:absolute;
+            left:0;
+            top:0;
+            width:25px;
+            height:30px;
+            background:lightslategrey;
+        }
+        #content{
+            position:relative;
+            width:300px;
+            height:300px;
+            border:2px solid #000000;
+            border-radius:10px;
+            background:lightyellow;
+            margin:25px;
+            overflow:hidden;
+            box-shadow:3px 3px 10px #888888;
+        }
+        #content p{
+            position:absolute;
+        }
+
+    </style>
+
+</head>
+<body>
+<div id="scroll">
+    <div id="scrollBar">
+    </div>
+</div>
+
+<div id="content">
+    <p>Treyarch发布了一张图，确认今年将要推出的就是《使命召唤15：黑色行动4》！
+        此外，他们也发布了一段30秒的短预热视频，其中出现的内容暗示了这是一款近现代时间的作品，并且跟之前的黑色行动系列有关，而且还出现了僵尸的画面，或许也暗示了僵尸模式的加入。
+        官方也对这个视频附上了一句描述：“忘记你所知道的(Forget what you know)”。
+        动视表示，游戏将在5月17日公布游戏的更多消息，预计在10月12日发售，登陆PC，PS4和Xbox One（游戏预购已经在亚马逊上架，PC版：点击进入，PS4版：点击进入，Xbox One版：点击进入）。
+        看来这一次Marcus Sellars又一次准确爆料对了。
+
+        游戏公布之后，似乎大家都对这个数字4很感兴趣。有玩家分析，官方特意用这种方式写4，可能剧情会与黑色行动2相关联（Marcus Sellars曾爆料本作时间设定在2020年，确实比较相符）。
+        还有一种说法是，虽然罗马数字的4是IV，但是在很多表盘上，4的写法依然是IIII，或许官方这么写暗示了本作跟时间有些许的关系。
+
+        另外还有一个值得留意的细节，使命召唤的官方网站上现在加入了暴雪战网登陆的选项，考虑到之前《命运2》的事情，或许《使命召唤15：黑色行动4》也要登陆暴雪战网了？
+    </p>
+</div>
+
+<script src="jquery.min.js"></script>
+<script>
+
+    $(function(){
+        /*$("#scrollBar").bind("mousedown mousemove",function(ev){
+            var e = window.event||ev;
+            $(this).css("left",e.pageX);
+        })*/
+
+        $("#scrollBar").mousedown(function (ev){
+
+            var e = window.event || ev;
+            var dis = e.pageY - $(this).offset().top;
+
+            $(document).mousemove(function (ev){    //这里mousemove的主体是document,是当鼠标移出scrollBar之后还可以使事件继续生效
+                var e = window.event || ev;
+
+                $("#scrollBar").css("top", e.pageY-dis-52);
+                // if($("#scrollBar").offset().left>500){   offset()是取得相对浏览器的距离，而position是相对父元素
+
+
+
+                if($("#scrollBar").position().top>270){
+                    $("#scrollBar").css("top", 270);
+                }else if($("#scrollBar").position().top<0){
+                    $("#scrollBar").css("top", 0);
+                }
+
+                var movePer = $("#scrollBar").position().top/270;  //计算移动距离的百分比
+                $("p").css("top",-(($("p").height()-$("#content").height())*movePer));  //要先减去大盒子的高度，这样到最后大盒子中正好有小盒子的全部内容
+            });
+
+            $(document).mouseup(function(){
+                $(document).unbind("mousemove");   //移除document的mousemove事件
+            });
+
+        })
+
+    });
+
+</script>
+</body>
+</html>

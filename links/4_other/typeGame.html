@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>typeGame</title>
+    <style>
+        *{margin:0; padding:0;}
+        #scorebox{
+            width:400px;
+            height:20px;
+            margin:0 auto;
+            padding:10px;
+        }
+        #box{
+            width:400px;
+            height:400px;
+            margin:0 auto;
+            padding:10px;
+            border:2px solid #808080;
+            border-radius:10px;
+            position:relative;
+        }
+        .number{
+            position:absolute;
+            width:20px;
+            height:20px;
+        }
+    </style>
+</head>
+<body>
+<div id="scorebox">score:<span id="score"> </span></div>
+<div id="box"></div>
+
+
+
+<script type="text/javascript">
+//元素节点的style属性不适用于ie，因此需要进行一些兼容
+    var n1=document.getElementById("n1"),
+        box=document.getElementById("box"),
+        score=document.getElementById("score"),
+        numCol=["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"],
+        innerLet="",
+        scoreValue=0;
+    var run=null;
+    //这个函数用于根据数组元素返回数组下标
+    function getIndex(ele){
+        for(var i=0; i<numCol.length; i++){
+            if(ele==numCol[i]){
+                return i;
+            }
+        }
+        return -1;
+    }
+    //这个函数用于创建一个随机位置的字母
+    function buildDiv(){
+        var numDiv=document.createElement("div"),
+            ranDis=Math.floor(Math.random()*400),
+            innerLet=numCol[Math.floor(Math.random()*26)];
+            window.innerLet=innerLet;
+        // numDiv.style="width:20px;height:20px;position:absolute;left:"+ranDis+"px;";
+        numDiv.style.cssText = "width:20px;height:20px;position:absolute;left:"+ranDis+"px;";   //ie浏览器中不可以直接修改style对象
+        numDiv.innerHTML=innerLet;
+        box.appendChild(numDiv);
+        return numDiv;
+    }
+    //让字母进行移动的函数，使用了闭包，目的是为了给setInterval传入不带参数的句柄
+    function move(node){
+
+        return function(){
+            node.style.top=node.offsetTop+30+"px";
+            if(node.offsetTop>350){
+                // clearInterval(run);
+                box.removeChild(node);
+            }
+        }
+    }
+    //该函数用于消除一个字母下落的线程
+    function clearThread(node){
+        // clearInterval(run);
+        box.removeChild(node);
+    }
+
+
+
+    score.firstChild.nodeValue=0;
+    setInterval(function(){
+
+        var newLet=buildDiv();
+        // run=setInterval("move(n1)",500); 方法一：由于setInterval函数第一个参数是不带参数的函数句柄，所以想要在setInterval的参数1中调用带参数的函数时，需要将字符串传入（此时不需要用内嵌函数）
+        run=setInterval(move(newLet),500);  //方法二：使用闭包，让move(n1)返回一个不带参数的函数句柄，使得setInterval可以直接传入调用的函数的参数
+        document.onkeydown=function(ev){
+            var e=window.event||ev;
+            for(var j=0; j<box.childNodes.length; j++){
+                var code=getIndex(box.childNodes[j].innerHTML)+65;
+                if(e.keyCode==code){
+                    clearThread(box.childNodes[j]);
+                    scoreValue+=1;
+                    score.firstChild.nodeValue='';
+                    score.firstChild.nodeValue=scoreValue;
+                }
+            }
+        }
+    },1000)
+
+</script>
+</body>
+</html>

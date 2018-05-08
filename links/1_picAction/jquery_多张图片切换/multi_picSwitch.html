@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>多张图片切换</title>
+    <style>
+        *{margin:0px; padding:0px;}
+
+        ul{
+            position:absolute;
+            left:0px;
+            list-style-type:none;
+            width:1600px;
+            height:340px;
+        }
+        ul li{
+            float:left;
+            margin:10px;
+            width:180px;
+            height:320px;
+        }
+        ul li img{
+            width:180px;
+            height:320px;
+        }
+
+        #box{
+            margin:50px auto;
+            width:800px;
+            height:340px;
+            overflow: hidden;
+            position:relative;
+        }
+        #btn div{
+            z-index: 10;
+            position:absolute;
+            top:145px;
+            height:50px;
+            width:30px;
+            background:#cccccc;
+            text-align:center;
+            line-height:50px;
+            cursor:pointer;
+            opacity:0.5;
+        }
+        #rbtn{
+            left:770px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="box">
+        <ul>
+            <li><img src="imgs/1.jpg"></li>
+            <li><img src="imgs/2.jpeg"></li>
+            <li><img src="imgs/3.jpeg"></li>
+            <li><img src="imgs/4.jpg"></li>
+            <li><img src="imgs/5.jpg"></li>
+            <li><img src="imgs/6.jpeg"></li>
+            <li><img src="imgs/7.png"></li>
+            <li><img src="imgs/8.jpg"></li>
+        </ul>
+        <div id="btn">
+            <div id="lbtn">&lt;</div>
+            <div id="rbtn">&gt;</div>
+        </div>
+    </div>
+
+<script src="jquery.min.js"></script>
+
+<script type="text/javascript">
+    $(function(){
+        /*
+        这里的选择器选择的是btn这个div，这个模块是box的第二个元素，所以下标永远为1，不可以这样选择
+        $("#btn").click(function(){
+            alert($(this).index());
+        });
+        */
+        var date = new Date();
+        var num=2;
+        $("#btn div").click(function(){
+            if((new Date()-date)>1000){
+                if($(this).index()==1){
+                    $("ul").animate({left:-(num*200)},1000,function(){
+                        // $("ul").appendTo($("ul").slice(0,num));
+                        $("ul li").slice(0,num).appendTo($("ul"));
+                        // $("ul").attr("left",0);  搞清楚样式和属性的区别！
+                        $("ul").css("left",0);
+                    });
+                }else{
+                    $("ul li").slice(-num).prependTo($("ul"));  //slice()函数里面的参数为负数时，表示选取后面几个元素
+                    $("ul").css("left",-(num*200));
+                    $("ul").animate({left:0},1000)
+                }
+                date=new Date();
+            }
+
+        })
+    })
+
+</script>
+
+</body>
+</html>

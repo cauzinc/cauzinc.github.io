@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>picSwitch</title>
+    <style>
+        *{margin:0px;padding:0px}
+        #box{
+            position:relative;
+            margin:100px auto;
+            width:1200px;
+            height:900px;
+            border:1px solid #000000;
+        }
+        #picBox{
+            position:relative;
+            width:1024px;
+            height:768px;
+            margin:66px auto;
+            overflow:hidden;
+        }
+
+        #mainPic{
+            position:absolute;
+            list-style-type: none;
+            width:5120px;
+            height:768px;
+        }
+        #mainPic li{
+            float:left;
+            width:1024px;
+            height:768px;
+        }
+        #lbtn{
+            position:absolute;
+            left:0;
+            top:410px;
+            width:50px;
+            height:80px;
+            background:#cccccc;
+            opacity:0.5;
+            font-size:30px;
+            text-align:center;
+            line-height:80px;
+        }
+        #rbtn{
+            position:absolute;
+            left:1150px;
+            top:410px;
+            width:50px;
+            height:80px;
+            background:#cccccc;
+            opacity:0.5;
+            font-size:30px;
+            text-align:center;
+            line-height:80px;
+        }
+        #thumbnails{
+            position:absolute;
+        }
+        #thumbnails ul li img{
+            width:154px;
+            height:128px;
+        }
+        #thumbnails ul{
+            position:absolute;
+            top: 620px;
+            left:77px;
+            list-style: none;
+            width:880px;
+            height:148px;
+        }
+        #thumbnails ul li{
+            float:left;
+            margin:10px;
+            width:154px;
+            height:128px;
+        }
+
+        .active{
+            border:4px solid orange;
+        }
+
+    </style>
+
+</head>
+<body>
+    <div id="box">
+        <div id="picBox">
+            <ul id="mainPic">
+                <li><img src="imgs/1.jpg"></li>
+                <li><img src="imgs/2.jpg"></li>
+                <li><img src="imgs/3.jpg"></li>
+                <li><img src="imgs/4.jpg"></li>
+                <li><img src="imgs/5.jpg"></li>
+            </ul>
+            <div id="thumbnails">
+                <ul>
+                    <li class="active"><img src="imgs/1.jpg"></li>
+                    <li><img src="imgs/2.jpg"></li>
+                    <li><img src="imgs/3.jpg"></li>
+                    <li><img src="imgs/4.jpg"></li>
+                    <li><img src="imgs/5.jpg"></li>
+                </ul>
+            </div>
+
+        </div>
+
+
+        <div id="btn">
+            <div id="lbtn">&lt;</div>
+            <div id="rbtn">&gt;</div>
+        </div>
+    </div>
+<script src="jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(function(){
+        var date = new Date();
+        var index=0;
+
+        $("#btn div").click(function(){
+
+            if((new Date()-date)>1000){
+                if($(this).index()==1){
+                    $("#mainPic").animate({left:-1024},1000,function(){
+                        $("#mainPic li").first().appendTo($("#mainPic"));
+                        $("#mainPic").css("left",0);
+                    });
+
+                    index++;
+                    if(index>4){
+                        index=0;
+                    }
+                    $("#thumbnails li").eq(index).addClass("active").siblings().removeClass();
+
+
+                }else{
+                    $("#mainPic li").last().prependTo($("#mainPic"));
+                    $("#mainPic").css("left",-1024);
+                    $("#mainPic").animate({left:0},1000);
+
+                    index--;
+                    if(index<0){
+                        index=4;
+                    }
+                    $("#thumbnails li").eq(index).addClass("active").siblings().removeClass();
+
+                }
+                date = new Date();
+            }
+        });
+
+        $("#thumbnails ul li").click(function(){
+            console.log($(this).index());
+            index = $(this).index();
+            var num=index;
+            $("#thumbnails ul li").eq(index).addClass("active").siblings().removeClass();
+
+        })
+
+
+
+
+    })
+
+</script>
+</body>
+</html>

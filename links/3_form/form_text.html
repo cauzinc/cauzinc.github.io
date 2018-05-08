@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>text</title>
+    <style>
+        *{  margin:0; padding:0;}
+        input{
+            margin:20px 0;
+        }
+        form span{
+            display:none;
+            font-size:16px;
+            color:red;
+            margin-left:20px;
+        }
+        .clicked{
+            opacity:0.3;
+        }
+        #box{
+            width:500px;
+            height:500px;
+            margin:0 auto;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <form action="">
+        <label for="user">userName:</label>
+        <input type="text" id="user" required><span id="userMsg">正确账号为admin</span><br>
+        <label for="psd">password:</label>
+        <input type="password" id="psd" required><span id="psdMsg">正确密码为123456</span><br>
+        <button type="submit">submit</button>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    window.onload = function(){
+        let userErr = document.getElementById('userMsg');
+        let psdErr = document.getElementById('psdMsg');
+        let form = document.forms[0];
+        //要使用this指针的时候不要使用箭头函数，因为箭头函数会改变this指向
+        form[0].onblur = function(){
+            this.value!=="admin"?userErr.style.display = "inline":userErr.style.display = "none";
+            this.style.background = "none";
+        };
+        //这一条应当写在form[0].focus()方法之前，否则执行方法时，还无法触发事件
+        form[0].onfocus = function(){
+            this.style.background = "yellow";
+        };
+        form[1].onblur = function(){
+            this.value!=="123456"?psdErr.style.display = "inline":psdErr.style.display = "none";
+            this.style.background = 'none';
+        };
+        form[1].onfocus = function(){
+            this.style.background = "yellow";
+        };
+
+        form[2].onclick = function(event){
+            let e = event||window.event;
+            if(e.preventDefault){
+                e.preventDefault();
+            }else{
+                e.returnValue = false;
+            }
+            this.classList.add('clicked');
+            this.disabled = true;
+        };
+
+        form[0].focus();
+    };
+</script>
+
+</body>
+</html>

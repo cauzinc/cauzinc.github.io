@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>select</title>
+    <style>
+        #box{
+            height:50px;
+            width:500px;
+            text-align:center;
+            margin:50px auto;
+        }
+        select{
+            margin:5px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <form action="" method="get">
+        <label for="pro"></label>
+        <select name="pro" id="pro">
+            <option value="">请选择</option>
+        </select>
+
+        <label for="city"></label>
+        <select name="city" id="city">
+            <option value="">请选择</option>
+        </select>
+
+
+        <label for="area"></label>
+        <select name="area" id="area">
+            <option value="">请选择</option>
+        </select>
+    </form>
+</div>
+
+
+<script type="text/javascript">
+    let arr = [
+        "上海",[
+            "静安区",["静安1","静安2","静安3"],
+            "徐汇区",["徐汇1","徐汇2","徐汇3"]
+        ],
+        "浙江",[
+            "杭州",["杭州1","杭州2","杭州3"],
+            "温州",["温州1","温州2","温州3"]
+        ],
+        "福建",[
+            "福州",["福州1","福州2","福州3"],
+            "厦门",["思明","翔安","湖里"]
+        ],
+        "江苏",[
+            '苏州',['苏州1','苏州2','苏州3'],
+            '南京',['南京1','南京2','南京3',]
+        ]
+    ];
+    let pro = document.getElementById('pro');
+    let city = document.getElementById('city');
+    let area = document.getElementById('area');
+
+    for(let i of arr){
+        if(typeof i === 'string'){
+            pro.add(new Option(i,i),null);
+        }
+    }
+
+    pro.addEventListener('change',function(){
+        city.innerHTML = '';
+        city.add(new Option('请选择',''));
+        area.innerHTML = '';
+        area.add(new Option('请选择',''));
+
+        for(let i=0,len=arr.length;i<len;i++){
+            if(arr[i] === this.value){
+                for(let j of arr[i+1]){
+                    if(typeof j === 'string'){
+                        city.add(new Option(j,j),null);
+                    }
+                }
+            }
+        }
+    });
+
+    city.addEventListener('change',function(){
+        area.innerHTML = '';
+        area.add(new Option('请选择',''));
+
+        for(let i=0,len=arr.length;i<len;i++){
+            if(arr[i] === pro.value){
+                for(let j=0,len=arr.length;j<len; j++){
+                    if(arr[i+1][j] === this.value){
+                        for(let k of arr[i+1][j+1]){
+                            area.add(new Option(k,k),null);
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+</script>
+
+</body>
+</html>

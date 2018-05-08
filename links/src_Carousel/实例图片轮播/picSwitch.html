@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片轮播</title>
+    <style>
+        *{padding:0px; margin:0px;}
+        ul{
+            position: absolute;
+            left:0px;
+            top:0px;
+            list-style-type:none;
+            width:2600px;
+            height:280px;
+        }
+        ul li{
+            width:520px;
+            height:280px;
+            float:left;
+        }
+        #box{
+            position:relative;
+            width:520px;
+            height:280px;
+            margin:50px auto;
+            overflow:hidden;
+        }
+        #btn div{
+            position: absolute;
+            width:20px;
+            height:40px;
+            background:lightskyblue;
+            top:120px;
+            line-height: 40px;
+            text-align:center;
+            cursor:pointer;
+            opacity:0.5;
+            filter:alpha(opacity:30);
+            display:none;
+        }
+        #Rbtn{
+            left:500px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="box">
+    <ul id="ul">
+        <li><img src="imgs/1.jpg" alt=""></li>
+        <li><img src="imgs/2.jpg" alt=""></li>
+        <li><img src="imgs/3.jpg" alt=""></li>
+        <li><img src="imgs/4.jpg" alt=""></li>
+        <li><img src="imgs/5.jpg" alt=""></li>
+    </ul>
+    <div id="btn">
+        <div id="Lbtn"><</div>
+        <div id="Rbtn">></div>
+    </div>
+
+</div>
+
+<script src="js/animate.js"></script>
+<script src="js/myJs.js"></script>
+
+</body>
+</html>
